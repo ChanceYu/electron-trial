@@ -1,0 +1,22 @@
+{
+  "name": "electron-trial",
+  "version": "1.0.0",
+  "description": "electron trial",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChanceYu/electron-trial.git"
+  },
+  "author": "ChanceYu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ChanceYu/electron-trial/issues"
+  },
+  "homepage": "https://github.com/ChanceYu/electron-trial#readme",
+  "devDependencies": {
+    "electron": "^1.8.4"
+  }
+}
