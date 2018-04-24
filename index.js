@@ -1,22 +1,36 @@
-const {app, BrowserWindow} = require('electron')
+const {app, BrowserWindow, Menu, ipcMain, ipcRenderer} = require('electron')
 const path = require('path')
 const url = require('url')
+const config = require('./config')
 
-let win
+let isDevelopment = config.dev == 'development';
+
+if (isDevelopment) {
+    require('electron-reload')(__dirname, {
+        ignored: /node_modules|[\/\\]\./
+    });
+}
+
+let MainWin
 
 function createWindow () {
-  win = new BrowserWindow({width: 800, height: 600})
+  MainWin = new BrowserWindow({
+    width: 1000,
+    height: 800
+  })
 
-  win.loadURL(url.format({
+  MainWin.loadURL(url.format({
     pathname: path.join(__dirname, 'index.html'),
     protocol: 'file:',
     slashes: true
   }))
 
-  win.webContents.openDevTools()
+  if (isDevelopment) {
+    MainWin.webContents.openDevTools();
+  }
 
-  win.on('closed', () => {
-    win = null
+  MainWin.on('closed', () => {
+    MainWin = null
   })
 }
 
@@ -29,7 +43,7 @@ app.on('window-all-closed', () => {
 })
 
 app.on('activate', () => {
-  if (win === null) {
+  if (MainWin === null) {
     createWindow()
   }
 })
